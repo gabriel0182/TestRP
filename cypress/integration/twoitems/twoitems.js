@@ -2,13 +2,26 @@ import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps';
 
 import multiple from  '../PageObject/multipleitems'
 import dress from  '../PageObject/dress'
+import Items from  '../PageObject/verifycart'
 
 const mp = new multiple
 const dr = new dress
+const it = new Items
 
 Given('The user is on Homepage', () => {
 
     mp.HomePage()
+    mp.WoMens()
+    mp.ToPs()
+    mp.Blouses()
+    mp.Cart()
+    mp.Alert()
+    mp.WoMens()
+    dr.dresses()
+    dr.evening()
+    dr.View()
+    dr.Popup()
+    dr.shopping()
     
   });
    
@@ -20,22 +33,19 @@ Given('The user is on Homepage', () => {
    
   When('And user verifies the total products = 2', () => { 
    
-    dr.dresses()
+    it.cart()
+    cy.get("[id='summary_products_quantity']").should('have.text', '2 Products')
       
   }) 
 
   When('And User Clicks checkout', () => { 
    
-    dr.evening()
+    it.checkout()
       
   }) 
 
   Then('user is taken to the Authentication screen', () => {
 
-    cy.xpath("//b[contains(text(),'Cart')]").trigger('mousedown', {which: 1})
-    cy.xpath("//span[@class='quantity']").then(($div) => {
-      expect($div).to.have.text('1')
-    })
-    cy.title().should('eq', 'My Store')
+        cy.get('.page-heading').should('have.text', 'Authentication')
     });
    

@@ -25,6 +25,7 @@ class multiple {
       "//div[@id='subcategories']//li[2]//div[1]//a[1]//img[1]"
     );
     blou.click();
+    blou.wait(2000)
     return this;
   }
 
@@ -32,7 +33,7 @@ class multiple {
     const add = cy.xpath(
       "//a[@class='product_img_link']//img[@class='replace-2x img-responsive']"
     );
-    add.trigger('mousedown', {which: 1}).xpath("//span[contains(text(),'Add to cart')]").click({timeout: 4000});
+    add.trigger('mousedown', {which: 0}).xpath("//span[contains(text(),'Add to cart')]").click({timeout: 4000});
     return this;
   }
 
